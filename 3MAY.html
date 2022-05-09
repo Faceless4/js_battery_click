@@ -1,0 +1,61 @@
+<div class="battery">
+    <div class="fill-low"></div>
+</div>
+<div class="battery">
+    <div class="fill-medium"></div>
+</div>
+<div class="battery">
+    <div class="fill-high"></div>
+</div>
+<style>
+    .battery {
+        position: relative;
+        border: 5px solid black;
+        width:500px;
+        margin:10px;
+
+    }
+    .battery:after{
+        content: "   ";
+        width:20px;
+        height:50px;
+        background: black;
+        position: absolute;
+        top: 20%;
+        left:100% ;
+    }
+    .fill-low > .fill-medium >.fill-high{
+        height: 80px;
+        max-width: 500px;
+    }
+    .fill-low {
+        width:100px;
+        height:80px;
+        background: crimson;
+        max-width: 500px;
+    }
+    .fill-medium {
+        width:250px;
+        height:80px;
+        background: #ffcc33;
+        max-width: 500px;
+    }
+    .fill-high {
+        width:500px;
+        height:80px;
+        background: #73A353;
+        max-width: 500px;
+    }
+</style>
+<script>
+    document.querySelectorAll('.battery')
+        .forEach(battery => {
+            battery.addEventListener('click', e => onBatteryClick(e, battery));
+        });
+    function onBatteryClick(event, batteryElement) {
+        console.log(batteryElement);
+        const fillElement = batteryElement.querySelector('div');
+        let rect=fillElement.getBoundingClientRect()
+        fillElement.style.width = event.clientX - rect.left ;
+    }
+</script>
